@@ -1,8 +1,14 @@
 # Job Automation Pipeline
 
+![Status: WIP](https://img.shields.io/badge/status-WIP-orange?style=for-the-badge)
+
 An automated job aggregation, scraping, and AI-powered evaluation pipeline designed to scout entry-level software development roles (AI, Java, Python, Full-Stack, and ML) for freshers (especially MCA graduates) in India.
 
 Built using **n8n**, **Google Gemini**, **Firecrawl**, **Telegram Alerts**, and **Google Sheets**.
+
+> [!NOTE]
+> **Status: Work In Progress (WIP) 🚧**
+> This pipeline and documentation are currently under active development. Some configurations or integration points may change.
 
 ---
 
