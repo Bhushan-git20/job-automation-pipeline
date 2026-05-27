@@ -1,62 +1,69 @@
-# Job Automation Pipeline
+# Job Automation Pipeline ⚙️🤖
 
-![Status: WIP](https://img.shields.io/badge/status-WIP-orange?style=for-the-badge)
-
-An automated job aggregation, scraping, and AI-powered evaluation pipeline designed to scout entry-level software development roles (AI, Java, Python, Full-Stack, and ML) for freshers (especially MCA graduates) in India.
-
-Built using **n8n**, **Google Gemini**, **Firecrawl**, **Telegram Alerts**, and **Google Sheets**.
-
-> [!NOTE]
-> **Status: Work In Progress (WIP) 🚧**
-> This pipeline and documentation are currently under active development. Some configurations or integration points may change.
+An intelligent, fully automated job aggregation and evaluation pipeline built to scout entry-level software development roles for freshers. This pipeline automatically scrapes, evaluates, and filters job postings, delivering only the highest-quality, relevant matches straight to your Telegram.
 
 ---
 
-## 🚀 Features
+## 🚀 Vision & Key Highlights
 
-- **Multi-Source Aggregation**: Periodically pulls job posts from:
-  - **Greenhouse ATS** (Freshworks, Krutrim, Hasura, Razorpay, BrowserStack, Postman, Meesho, Zepto, Groww)
-  - **Lever ATS** (Sarvam AI, Yellow.ai, MoEngage, CleverTap, Sprinklr, Chargebee, Zoho)
-  - **Remotive** (Global remote developer jobs)
-- **Automatic De-duplication**: Integrates with Google Sheets (`SeenJobs` sheet) to record previously processed URLs and skip them on subsequent runs.
-- **Deep Scrape (Firecrawl)**: Uses Firecrawl to scrape full Job Descriptions (JD) in markdown format directly from dynamic career pages.
-- **AI Decision Maker (Gemini)**: Leverages Gemini to analyze each JD against strict eligibility criteria (e.g., 0-1 years experience, India/Remote, dev-focused) and filter out senior roles, non-dev roles, or unsupported tech stacks.
-- **Telegram Alerts**: Sends instantly-formatted Telegram notifications for every qualifying job post.
+- **Zero-Touch Operation**: Runs entirely on a schedule via n8n, requiring no manual intervention.
+- **Smart Filtering**: Uses Google Gemini to act as an AI recruiter, reading the actual Job Description and filtering out senior roles, non-development jobs, or unsupported tech stacks.
+- **Automated De-duplication**: Connects to Google Sheets to remember every job it has seen, ensuring you never get duplicate alerts.
+- **Instant Alerts**: Posts cleanly formatted job summaries (Role, Company, Salary, Location, Link) directly to your Telegram immediately after evaluation.
 
 ---
 
-## 🛠️ Tech Stack & Integrations
+## ✨ How It Works (The Pipeline)
 
-- **Orchestration**: [n8n](https://n8n.io/)
-- **LLM/Decision Engine**: Google Gemini API
-- **Web Scraper**: [Firecrawl](https://www.firecrawl.dev/) (Markdown extraction format)
-- **Database/Log**: Google Sheets API
-- **Notifications**: Telegram Bot API
+1. **Source Aggregation**: Periodically pulls raw job postings from major ATS platforms (Greenhouse, Lever) and remote job boards (Remotive).
+2. **Deep Scraping (Firecrawl)**: When a new job is found, it uses Firecrawl to scrape the dynamic career page and extract the full Job Description as clean Markdown.
+3. **AI Decision Engine**: Gemini reads the Markdown JD and checks it against strict eligibility criteria (e.g., 0-1 years experience, India/Remote, dev-focused). 
+4. **Data Logging**: The job URL and evaluation result are logged into a Google Sheet (`SeenJobs`) so it is never processed again.
+5. **Notification**: If the AI approves the job, a Telegram bot fires a message to your phone with the job details.
 
 ---
 
-## 📋 Prerequisites & Setup
+## 🛠️ Technology Stack
+
+| Component | Technology |
+|---|---|
+| **Orchestration** | n8n (Node-based automation) |
+| **AI Decision Engine** | Google Gemini API |
+| **Web Scraper** | Firecrawl API (Markdown extraction) |
+| **Database/Log** | Google Sheets API |
+| **Notifications** | Telegram Bot API |
+
+---
+
+## 📁 Core Files & Code Structure
+
+- `workflow.json`: The core export of the n8n pipeline. This JSON file contains all the node connections, JavaScript transformation logic, AI prompt configurations, and API integrations.
+- `Google Sheets (Cloud)`: Acts as the persistent database (`CareerPages` for targets, `SeenJobs` for logs).
+
+---
+
+## 🚀 Getting Started
 
 ### 1. Google Sheets Configuration
 Create a Google Sheet with two sub-sheets:
-- **`CareerPages`**: For storing targets for direct scraping.
+- **`CareerPages`**: For storing target URLs.
   - Columns: `company`, `URL`, `active` (boolean)
 - **`SeenJobs`**: For logging evaluated job links.
   - Columns: `job_url`, `job_title`, `company`, `source`, `date_found`
 
 ### 2. Required Credentials in n8n
 - **Google Sheets OAuth2 API**: For reading targets and logging seen jobs.
-- **Google Gemini API (PaLM/Gemini)**: For evaluating the JDs.
-- **Telegram Bot API**: Bot token and Chat ID (`8480554995`) for receiving channel alerts.
+- **Google Gemini API**: For evaluating the Job Descriptions.
+- **Telegram Bot API**: Bot token and your Chat ID for receiving channel alerts.
 - **Firecrawl API Key**: Configured via environment variable (`FIRECRAWL_KEY`) or direct headers.
 
-### 3. Workflow Import
-1. Clone this repository or copy the contents of [workflow.json](file:///d:/ANTI%20GRAVITY/job-automation-pipeline/workflow.json).
+### 3. Import the Pipeline
+1. Clone this repository.
 2. Open your **n8n canvas**.
-3. Press `Ctrl + F` or go to **Import from File** and upload the `workflow.json` file.
-4. Set up the credentials for the nodes, save, and activate!
+3. Go to **Import from File** and upload the `workflow.json` file.
+4. Re-link your credentials to the respective nodes, enable the webhook/cron trigger, and activate the workflow!
 
 ---
 
-## 📄 License
-This project is licensed under the MIT License.
+## 📜 License
+Educational and personal use. © 2026 Bhushan Damisetti.
