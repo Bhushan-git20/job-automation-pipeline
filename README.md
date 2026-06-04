@@ -2,6 +2,8 @@
 
 An intelligent, fully automated job aggregation and evaluation pipeline built to scout entry-level software development roles for freshers. This pipeline automatically scrapes, evaluates, and filters job postings, delivering only the highest-quality, relevant matches straight to your Telegram.
 
+![Job Automation Telegram Alert](screenshot.png)
+
 ---
 
 ## 🚀 Vision & Key Highlights
