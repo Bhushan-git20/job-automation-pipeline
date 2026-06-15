@@ -68,4 +68,4 @@ Create a Google Sheet with two sub-sheets:
 ---
 
 ## 📜 License
-Educational and personal use. © 2026 Bhushan Damisetti.
+Educational and personal use. © 2026 Bhushan Damisetti. All rights reserved.
