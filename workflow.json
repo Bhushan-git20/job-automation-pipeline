@@ -91,7 +91,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer fc-09790dd2eb1249f6b4fc09fb3bd83184"
+              "value": "=Bearer {{ $env.FIRECRAWL_KEY }}"
             },
             {
               "name": "Content-Type",
