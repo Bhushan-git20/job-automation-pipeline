@@ -57,7 +57,7 @@ Create a Google Sheet with two sub-sheets:
 - **Google Sheets OAuth2 API**: For reading targets and logging seen jobs.
 - **Google Gemini API**: For evaluating the Job Descriptions.
 - **Telegram Bot API**: Bot token and your Chat ID for receiving channel alerts.
-- **Firecrawl API Key**: Configured via environment variable (`FIRECRAWL_KEY`) or direct headers.
+- **Firecrawl API Key**: You must provide this as an environment variable to your n8n instance before starting the container/server. For example, if you run n8n via Docker, add `-e FIRECRAWL_KEY="your-key-here"` to your `docker run` command. The workflow relies on `{{ $env.FIRECRAWL_KEY }}` to authenticate safely.
 
 ### 3. Import the Pipeline
 1. Clone this repository.
